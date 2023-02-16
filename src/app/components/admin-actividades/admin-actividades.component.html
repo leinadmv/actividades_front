@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>
+    {{ data.title }}
+    <button style="float: right" mat-icon-button mat-dialog-close>
+        <mat-icon>clear</mat-icon>
+    </button>
+</h2>
+
+<form class="row form" [formGroup]="actividadesForm" style="overflow-x: hidden;" (ngSubmit)="saveActividad(actividadesForm)">
+
+<mat-dialog-content class="mat-typography" >
+
+        <mat-form-field class="col-12" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input style="text-transform: capitalize;" matInput type="text" placeholder="Escribe el nombre" formControlName="nombre" required cdkFocusInitial>
+            <mat-error *ngIf="error.nombre.errors?.required">¡Advertencia! Este campo es requerido</mat-error>
+            <mat-error *ngIf="error.nombre.errors?.minlength">¡Aún falta! Recibimos mínimo 3 caracteres</mat-error>
+            <mat-error *ngIf="error.nombre.errors?.maxlength">¡Cuidado! Solo puedes tener un máximo de 40 caracteres</mat-error>
+        </mat-form-field>
+
+        <mat-form-field  class="col-12" appearance="fill">
+            <mat-label>Descripcion</mat-label>
+            <textarea style="text-transform: capitalize;" matInput type="text" placeholder="Escribe la descripcion" formControlName="descripcion" required ></textarea>
+            <mat-error *ngIf="error.descripcion.errors?.required">¡Advertencia! Este campo es requerido</mat-error>
+            <mat-error *ngIf="error.descripcion.errors?.minlength">¡Aún falta! Recibimos mínimo 3 caracteres</mat-error>
+        </mat-form-field>
+
+        <mat-form-field  class="col-12">
+            <mat-label>Fecha y hora de estimacion</mat-label>
+            <input matInput [ngxMatDatetimePicker]="picker" placeholder="Fecha y hora de estimacion" formControlName="fechaEstimada">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+            <mat-error *ngIf="error.fechaEstimada.errors?.required">¡Advertencia! Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12" appearance="fill">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado" required>
+                <mat-option value="true"> Realizado </mat-option>
+                <mat-option value="false"> Pendiente </mat-option>
+            </mat-select>
+            <mat-error *ngIf="error.estado.errors?.required">¡Advertencia! Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12" appearance="fill">
+            <mat-label>Empleado encargado</mat-label>
+            <mat-select formControlName="empleado" required>
+                <mat-option *ngFor="let empleado of empleados" [value]="empleado.id">
+                    {{ empleado.nombre }} {{ empleado.apellido }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="error.empleado.errors?.required">¡Advertencia! Este campo es requerido</mat-error>
+        </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+    <button mat-stroked-button mat-dialog-close>Cancelar</button>
+    <button mat-raised-button type="submit" color="primary" disabled='{{actividadesForm.invalid}}' [mat-dialog-close]="true">Guardar</button>
+</mat-dialog-actions>
+
+</form>
