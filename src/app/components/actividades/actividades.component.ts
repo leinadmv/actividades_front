@@ -31,6 +31,10 @@ export class ActividadesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  /**
+   * Metodo que se encarga de obtener las actividades, calcular los dias de retraso de las actividades
+   * con respecto a la fecha actual y guardar la lista en el datasource para pintarla
+   */
   getActividades(): void{
 
     this.actividadesService.getActividades().subscribe((resp: Actividad[]) => {
@@ -45,6 +49,12 @@ export class ActividadesComponent implements OnInit {
 
   }
 
+  /**
+   * Metodo que se encarga de abrir el modal del formulario de crear o de editar una actividad
+   * @param type 2 tipos de modal, crear o editar
+   * @param title titulo que aparecera en el modal
+   * @param actividad si el tipo es editar se le envia la actividad a editar este campo es opcional
+   */
   newActividad(type, title, actividad?): void{
     const dialogNewRol = this.dialog.open(AdminActividadesComponent, {
       width: '30%',
@@ -63,6 +73,10 @@ export class ActividadesComponent implements OnInit {
 
   }
 
+  /**
+   * Metodo que se encarga de la eliminacion de una actividad
+   * @param id id de la actividad a eliminar
+   */
   eleminarActividad(id:number): void{
 
     this.actividadesService.deleteActividades(id).subscribe((resp: any) => {

@@ -28,6 +28,9 @@ export class AdminActividadesComponent implements OnInit {
       this.setEdit();
     }
 
+    /*
+    *Obtengo los empleados a mostrar en el modal de creacion o edicion de actividad
+    */
     this.empleadoService.getEmpleados().subscribe((resp: Array<Empleado>) => {
       this.empleados = resp;
     });
@@ -35,6 +38,9 @@ export class AdminActividadesComponent implements OnInit {
 
   get error(): any {return this.actividadesForm.controls; }
 
+/**
+ * Controles de validacion para el formulario reactivo de crear o editar una actividad 
+ */
   formControl(): void{
 
     this.actividadesForm = new FormGroup({
@@ -48,6 +54,10 @@ export class AdminActividadesComponent implements OnInit {
 
   }
 
+  /**
+   * metodo que se encarga de tomar los datos del formulario reactivo y enviarlos para que se creen
+   * @param actividadesForm formulario reactivo con los datos
+   */
   saveActividad(actividadesForm: FormGroup):void{
 
     let actividad: Actividad = {
@@ -61,6 +71,9 @@ export class AdminActividadesComponent implements OnInit {
     actividad.estado = actividadesForm.value.estado;
     actividad.empleado!.id = actividadesForm.value.empleado;
 
+    /**
+     * si el modal es de tipo editar asigno el id para que no llegue null y springboot lo edite
+     */
     if (this.data.type === 'editar'){
       actividad.id = this.data.actividad.id;
     }
@@ -75,6 +88,9 @@ export class AdminActividadesComponent implements OnInit {
 
   }
 
+  /**
+   * Metodo que se encarga de setear la data de la actividad a editar en los campos del modal
+   */
   setEdit():void{
 
     this.actividadesForm.controls['nombre'].setValue(this.data.actividad.nombre);

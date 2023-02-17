@@ -17,6 +17,10 @@ export class ActividadesService {
     return throwError(error);
   }
 
+  /**
+   * Servicio que se encarga de listar las actividades
+   * @returns lista de actividades
+   */
   getActividades(): Observable<Actividad[]> {
     return this.http.get<any>(`${BACK_URL}actividades`)
       .pipe(
@@ -24,6 +28,11 @@ export class ActividadesService {
       );
   }
 
+  /**
+   * Servicio que se encarga de guardar una actividad
+   * @param actividad actividad a guardar
+   * @returns actividad guardada
+   */
   postActividades(actividad: Actividad): Observable<any> {
     return this.http.post<any>(`${BACK_URL}actividades`, actividad)
     .pipe(
@@ -31,6 +40,11 @@ export class ActividadesService {
     );
   }
 
+  /**
+   * Servicio que se encarga de eliminar una actividad por su id
+   * @param id id de la actividad
+   * @returns estaod de exito o error
+   */
   deleteActividades(id:number): Observable<any> {
     return this.http.delete<any>(`${BACK_URL}actividades/${id}`)
     .pipe(

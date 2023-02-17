@@ -17,6 +17,10 @@ export class EmpleadosService {
     return throwError(error);
   }
 
+  /**
+   * Servicio que se encarga de traer la lista de los empleados
+   * @returns lista de empleados
+   */
   getEmpleados(): Observable<Empleado[]> {
     return this.http.get<any>(`${BACK_URL}empleados`)
       .pipe(
