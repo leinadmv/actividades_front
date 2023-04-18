@@ -1,11 +1,9 @@
-import { CloseScrollStrategy } from '@angular/cdk/overlay';
-import { compileNgModule } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Actividad } from 'src/app/models/actividad.model';
-import { ActividadesService } from 'src/app/services/actividades.service';
+import { Actividad } from 'src/app/modulos/actividades/models/actividad.model';
+import { ActividadesService } from 'src/app/modulos/actividades/services/actividades.service';
 import Swal from 'sweetalert2';
 import { AdminActividadesComponent } from '../admin-actividades/admin-actividades.component';
 
@@ -77,7 +75,7 @@ export class ActividadesComponent implements OnInit {
    * Metodo que se encarga de la eliminacion de una actividad
    * @param id id de la actividad a eliminar
    */
-  eleminarActividad(id:number): void{
+  eliminarActividad(id:number): void{
 
     this.actividadesService.deleteActividades(id).subscribe((resp: any) => {
       this.getActividades();
@@ -90,3 +88,4 @@ export class ActividadesComponent implements OnInit {
   }
 
 }
+

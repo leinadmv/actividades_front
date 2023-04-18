@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EmpleadosService } from 'src/app/services/empleados.service';
-import { Empleado } from 'src/app/models/empleado.model';
-import { Actividad } from 'src/app/models/actividad.model';
-import { ActividadesService } from 'src/app/services/actividades.service';
+import { EmpleadosService } from 'src/app/modulos/empleados/services/empleados.service';
+import { Empleado } from 'src/app/modulos/empleados/models/empleado.model';
+import { Actividad } from 'src/app/modulos/actividades/models/actividad.model';
+import { ActividadesService } from 'src/app/modulos/actividades/services/actividades.service';
 import Swal from 'sweetalert2';
 
 @Component({

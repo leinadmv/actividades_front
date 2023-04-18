@@ -1,0 +1,47 @@
+<div class="login" fxLayoutAlign="center center">
+
+  <mat-card >
+
+    <mat-card-header >
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+
+    <form class="row form" [formGroup]="loginForm" (ngSubmit)="loginAuth(loginForm)" style="min-height: 60%;">
+
+    <mat-card-content  >
+
+      <div fxLayout="column" fxLayoutAlign="space-around center" style="padding: 5%;" >
+
+        <mat-form-field class="col-12"  appearance="fill">
+          <mat-label>Nombre de usuario</mat-label>
+          <input matInput type="text" placeholder="Escribe tu nombre de usuario" formControlName="user"  required>
+          <mat-error *ngIf="error.user.errors?.required">¡Advertencia! Este campo es requerido</mat-error>
+          <mat-error *ngIf="error.user.errors?.minlength">¡Aún falta! Recibimos mínimo 3 caracteres</mat-error>
+          <mat-error *ngIf="error.user.errors?.maxlength">¡Cuidado! Solo puedes tener un máximo de 50 caracteres</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-12"  appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput (keydown.enter)="loginAuth(loginForm)" [type]="hide ? 'password' : 'text'" placeholder="Escribe tu contraseña" formControlName="password" required>
+          <mat-error *ngIf="error.password.errors?.required">¡Advertencia! Este campo es requerido</mat-error>
+          <mat-error *ngIf="error.password.errors?.minlength">¡Aún falta! Recibimos mínimo 5 caracteres</mat-error>
+          <mat-error *ngIf="error.password.errors?.maxlength">¡Cuidado! Solo puedes tener un máximo de 15 caracteres</mat-error>
+          <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ?  'visibility' : 'visibility_off'}}</mat-icon>
+          </a>
+      </mat-form-field>
+
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end" style="padding-right: 10%;">
+      <button mat-raised-button color="primary" disabled='{{loginForm.invalid}}'>Ingresar</button>
+    </mat-card-actions>
+
+  </form>
+
+  </mat-card>
+
+</div>
+

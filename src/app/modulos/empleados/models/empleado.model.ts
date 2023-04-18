@@ -1,4 +1,4 @@
-import { Actividad } from "./actividad.model";
+import { Actividad } from "../../actividades/models/actividad.model";
 
 export class Empleado {
 
